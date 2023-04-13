@@ -120,53 +120,34 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="HAL\button\button.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\button\button.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\button\button_types.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\led\led.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\led\led.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\led\led_types.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\dio\dio.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\dio\dio.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\dio\dio_config.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\dio\dio_init.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\interrupt\ext_int.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\interrupt\ext_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\interrupt\ext_int_config.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\interrupt\interrupt.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\timer\timer.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\timer\timer.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\timer\timer_app.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\timer\timer_config.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\timer\timer_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\timer\timer_shared.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="HAL\led" />
+    <Folder Include="HAL\button" />
+    <Folder Include="HAL\motor" />
+    <Folder Include="HAL\pwm" />
+    <Folder Include="HAL\timer_manager" />
     <Folder Include="MCAL" />
     <Folder Include="HAL" />
     <Folder Include="APP" />
