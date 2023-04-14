@@ -129,6 +129,12 @@
     <Compile Include="HAL\button\button_types.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\EXT_interrupt_manager\EXT_interrupt_manager.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\EXT_interrupt_manager\EXT_interrupt_manager.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\led\led.c">
       <SubType>compile</SubType>
     </Compile>
@@ -147,8 +153,18 @@
     <Compile Include="MCAL\dio\dio.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\EXT_Interrupt\EXT_Interrupt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\EXT_Interrupt\EXT_Interrupt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\interrupt.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="HAL\EXT_interrupt_manager\" />
     <Folder Include="HAL\led" />
     <Folder Include="HAL\button" />
     <Folder Include="HAL\motor" />
@@ -158,6 +174,7 @@
     <Folder Include="HAL" />
     <Folder Include="APP" />
     <Folder Include="MCAL\dio" />
+    <Folder Include="MCAL\EXT_Interrupt\" />
     <Folder Include="MCAL\interrupt" />
     <Folder Include="MCAL\timer" />
   </ItemGroup>
