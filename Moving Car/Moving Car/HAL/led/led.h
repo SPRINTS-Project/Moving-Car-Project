@@ -11,6 +11,12 @@
 #define LED_H_
 
 
+#include "led_types.h"
+
+void LED_init(void);
+u8_en_ledErrorType LED_off(u8_en_ledIdType led);
+u8_en_ledErrorType LED_on(u8_en_ledIdType led);
+
 
 
 

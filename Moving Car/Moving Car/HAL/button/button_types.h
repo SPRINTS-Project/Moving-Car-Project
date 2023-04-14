@@ -13,16 +13,12 @@
 
 #include <stdint.h>
 
-#define BUTTON_HOLD_THRESHOLD    20
-#define BUTTONS_NUM				 1U
-
-
 
 // Create Button Level ENUM
-typedef uint8_t Button_LevelType;
+typedef uint8_t u8_en_btnLevelType;
 
-#define BT_PUSH_LEVEL				((Button_LevelType)0x00)
-#define BT_RELEASE_LEVEL	        ((Button_LevelType)0x01)
+#define BT_PUSH_LEVEL				((u8_en_btnLevelType)0x00)
+#define BT_RELEASE_LEVEL	        ((u8_en_btnLevelType)0x01)
 
 
 
@@ -48,9 +44,9 @@ typedef uint8_t u8_en_btnStateType;
 
 
 typedef struct{
-	uint8_t u8_a_channelId;
+	uint8_t u8_a_channelId[2];						//0: port		1:pin
 	uint8_t u8_a_debounceThreshold;
-	uint8_t u8_a_HoldThreshold;
+	uint8_t u8_a_holdThreshold;
 }st_btnConfigType;
 
 

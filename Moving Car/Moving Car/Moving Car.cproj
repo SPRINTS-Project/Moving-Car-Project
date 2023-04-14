@@ -141,6 +141,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\dio\dio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\dio\dio.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="HAL\led" />
