@@ -28,7 +28,7 @@ void led_Init(void)
 	
 	for (u8_index = 0 ; u8_index < LED_NUMs ; u8_index++)
 	{
-		DIO_init((st_gc_ledConfig[u8_index].u8_a_channelId[0]), (st_gc_ledConfig[u8_index].u8_a_channelId[1]) , STD_OUTPUT);
+		DIO_init((st_gc_ledConfig[u8_index].u8_a_ledChannelID[0]), (st_gc_ledConfig[u8_index].u8_a_ledChannelID[1]) , STD_OUTPUT);
 		if (st_gc_ledConfig[u8_index].u8_a_ledState == LED_ON)
 		{
 			LED_on(u8_index+1);
@@ -49,7 +49,7 @@ u8_en_ledErrorType LED_off(u8_en_ledIdType led)
 	{
 		return LED_UNDEFINED;
 	}
-	DIO_writePIN((st_gc_ledConfig[led].u8_a_channelId[0]), (st_gc_ledConfig[led].u8_a_channelId[1]) ,LED_OFF);
+	DIO_writePIN((st_gc_ledConfig[led].u8_a_ledChannelID[0]), (st_gc_ledConfig[led].u8_a_ledChannelID[1]) ,LED_OFF);
 	return  LED_OK;
 }
 u8_en_ledErrorType LED_on(u8_en_ledIdType led)
@@ -58,6 +58,6 @@ u8_en_ledErrorType LED_on(u8_en_ledIdType led)
 	{
 		return LED_UNDEFINED;
 	}
-	DIO_writePIN((st_gc_ledConfig[led].u8_a_channelId[0]), (st_gc_ledConfig[led].u8_a_channelId[1]) ,LED_ON);
+	DIO_writePIN((st_gc_ledConfig[led].u8_a_ledChannelID[0]), (st_gc_ledConfig[led].u8_a_ledChannelID[1]) ,LED_ON);
 	return  LED_OK;
 }
