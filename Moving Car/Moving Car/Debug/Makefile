@@ -50,6 +50,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../HAL/button/button.c \
 ../HAL/led/led.c \
+../HAL/motor/motor.c \
 ../main.c \
 ../MCAL/dio/dio.c
 
@@ -63,24 +64,28 @@ ASM_SRCS +=
 OBJS +=  \
 HAL/button/button.o \
 HAL/led/led.o \
+HAL/motor/motor.o \
 main.o \
 MCAL/dio/dio.o
 
 OBJS_AS_ARGS +=  \
 HAL/button/button.o \
 HAL/led/led.o \
+HAL/motor/motor.o \
 main.o \
 MCAL/dio/dio.o
 
 C_DEPS +=  \
 HAL/button/button.d \
 HAL/led/led.d \
+HAL/motor/motor.d \
 main.d \
 MCAL/dio/dio.d
 
 C_DEPS_AS_ARGS +=  \
 HAL/button/button.d \
 HAL/led/led.d \
+HAL/motor/motor.d \
 main.d \
 MCAL/dio/dio.d
 
@@ -106,6 +111,13 @@ HAL/button/button.o: ../HAL/button/button.c
 	
 
 HAL/led/led.o: ../HAL/led/led.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+HAL/motor/motor.o: ../HAL/motor/motor.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

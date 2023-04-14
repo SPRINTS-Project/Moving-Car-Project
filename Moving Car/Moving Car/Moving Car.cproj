@@ -138,6 +138,12 @@
     <Compile Include="HAL\led\led_types.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\motor\motor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\motor\motor.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

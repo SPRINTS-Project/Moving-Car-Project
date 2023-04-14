@@ -6,6 +6,8 @@ HAL\button\button.c
 
 HAL\led\led.c
 
+HAL\motor\motor.c
+
 main.c
 
 MCAL\dio\dio.c
