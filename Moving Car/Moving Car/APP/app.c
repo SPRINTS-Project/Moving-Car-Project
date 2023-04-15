@@ -32,7 +32,7 @@ const st_btnConfigType st_gc_btn_config[]={
 uint8_t volatile u8_gv_delay = 0; 
 
 
-ISR(TIMER1_OVF_vect)
+ISR(TIMER1_OVF)
 {
 	u8_gv_delay++;
 	
@@ -40,7 +40,7 @@ ISR(TIMER1_OVF_vect)
 }
 
 
-ISR(INT0_vect)
+ISR(EXT_INT0)
 {
 	u8_gv_delay = 0;
 	u8_gs_v_progState = BTN_STOP;
@@ -50,7 +50,7 @@ ISR(INT0_vect)
 
 void APP_start(void)
 {
-	DDRC = 0xff;
+	
 	u8_en_btnStateType btnState = BT_PRE_PUSH;
 	
 	
@@ -70,9 +70,9 @@ void APP_start(void)
 	timer1.timer_InitialValue = 61629;
 	TIMER_MANGER_init(&timer1);*/
 	
+	
 	GICR = 1<<INT0;
 	MCUCR = 1<<ISC01;
-	
 	
 	
 	TCCR1A = 0x00;
@@ -88,21 +88,26 @@ void APP_start(void)
 		while (u8_gs_v_progState == BTN_STOP)
 		{
 			BUTTON_mainTask();
+			
+			
 			LED_off(st_gc_ledsConfig[LED_SHORT_SIDE].u8_a_port , st_gc_ledsConfig[LED_SHORT_SIDE].u8_a_pin);
 			LED_off(st_gc_ledsConfig[LED_LONG_SIDE].u8_a_port , st_gc_ledsConfig[LED_LONG_SIDE].u8_a_pin);
 			LED_off(st_gc_ledsConfig[LED_ROTATE].u8_a_port , st_gc_ledsConfig[LED_ROTATE].u8_a_pin);
 			LED_on(st_gc_ledsConfig[LED_STOP].u8_a_port , st_gc_ledsConfig[LED_STOP].u8_a_pin);
 			
+			
 			// Here We Will STOP motors
 			
+			// Here Stop timer 1
 			
 			
 			btnState = BUTTON_getState(st_gc_btn_config[0].u8_a_ID);
-			PORTC = btnState;
+			
 			if (btnState == BT_RELEASED)
 			{
 				u8_gs_v_progState = BTN_START;
 			}
+			u8_gv_delay = 0;
 		}
 		while (u8_gs_v_progState == BTN_START)
 		{

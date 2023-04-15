@@ -12,9 +12,9 @@
 #define  F_CPU		8000000UL
 #include "../HAL/button/button.h"
 #include "../HAL/led/led.h"
-//#include "../HAL/EXT_interrupt_manager/ext_interrupt_manager.h"
+#include "../HAL/EXT_interrupt_manager/ext_interrupt_manager.h"
 //#include "../MCAL/EXT_Interrupt/interrupt.h"
-#include <avr/interrupt.h>
+//#include <avr/interrupt.h>
 
 
 #define BTN_START		0x00
