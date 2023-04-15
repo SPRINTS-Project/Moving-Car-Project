@@ -19,10 +19,10 @@ EN_motor_error_t MOTOR_INIT(ST_motor_t* motor)
 		return MOTOR_NOK;
 	}
 }
-EN_motor_error_t MOTOR_FORWARD(ST_motor_t* motor,uint8_t u8_a_speed)
+EN_motor_error_t MOTOR_FORWARD(ST_motor_t* motor)
 {
 	if(DIO_writePIN(motor->port,motor->pin_num1,STD_HIGH)==DIO_E_OK && DIO_writePIN(motor->port,motor->pin_num2,STD_LOW)==DIO_E_OK)
-	{   MOTOR_SPEED(u8_a_speed);
+	{   
 		return MOTOR_OK;
 	}
 	else
@@ -30,10 +30,10 @@ EN_motor_error_t MOTOR_FORWARD(ST_motor_t* motor,uint8_t u8_a_speed)
 		return MOTOR_NOK;
 	}
 }
-EN_motor_error_t MOTOR_BACKWARD(ST_motor_t* motor,uint8_t u8_a_speed)
+EN_motor_error_t MOTOR_BACKWARD(ST_motor_t* motor)
 {
 	if(DIO_writePIN(motor->port,motor->pin_num1,STD_LOW)==DIO_E_OK && DIO_writePIN(motor->port,motor->pin_num2,STD_HIGH)==DIO_E_OK)
-	{    MOTOR_SPEED(u8_a_speed);
+	{    
 		return MOTOR_OK;
 	}
 	else
@@ -51,8 +51,4 @@ EN_motor_error_t MOTOR_STOP(ST_motor_t* motor)
 	{
 		return MOTOR_NOK;
 	}
-}
-void MOTOR_SPEED(uint8_t u8_a_speed)
-{
-	
 }

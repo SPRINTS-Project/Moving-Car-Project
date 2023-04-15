@@ -42,7 +42,7 @@ EN_motor_error_t MOTOR_INIT(ST_motor_t* motor);
 * input       : pointer to structure which have port and two pin number and speed of motor
 * return      :MOTOR_OK or MOTR_NOK
 ************************************************************************/
-EN_motor_error_t MOTOR_FORWARD(ST_motor_t* motor,uint8_t u8_a_speed);
+EN_motor_error_t MOTOR_FORWARD(ST_motor_t* motor);
 
 
 /************************************************************************
@@ -50,7 +50,7 @@ EN_motor_error_t MOTOR_FORWARD(ST_motor_t* motor,uint8_t u8_a_speed);
 * input       : pointer to structure which have port and two pin number and speed of motor
 * return      :MOTOR_OK or MOTR_NOK
 ************************************************************************/
-EN_motor_error_t MOTOR_BACKWARD(ST_motor_t* motor,uint8_t u8_a_speed);
+EN_motor_error_t MOTOR_BACKWARD(ST_motor_t* motor);
 
 
 /************************************************************************
@@ -60,13 +60,6 @@ EN_motor_error_t MOTOR_BACKWARD(ST_motor_t* motor,uint8_t u8_a_speed);
 ************************************************************************/
 EN_motor_error_t MOTOR_STOP(ST_motor_t* motor);
 
-
-/************************************************************************
-* description : this function take speed of motor
-* input       : speed of motor
-* return      :void
-************************************************************************/
-void MOTOR_SPEED(uint8_t u8_a_speed);
 
 
 

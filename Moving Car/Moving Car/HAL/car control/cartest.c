@@ -23,11 +23,11 @@ void main(void)
 	CAR_INIT(&motor_1,&motor_2);
 	while(1)
 	{
-		CAR_FORWARD(&motor_1,&motor_2,20);
+		CAR_FORWARD(&motor_1,&motor_2);
 		_delay_ms(1000);
 		CAR_STOP(&motor_1,&motor_2);
 		_delay_ms(1000);
-		CAR_REVERSE_RIGHT(&motor_1,&motor_2,20);
+		CAR_REVERSE_RIGHT(&motor_1,&motor_2);
 		_delay_ms(1000);
 		CAR_STOP(&motor_1,&motor_2);
 		_delay_ms(1000);
