@@ -17,6 +17,7 @@
 /*mask 8-bit_reg*/
 #define U8_BIT_REG_MASK           ((uint8_t)0xFF)
 #define U16_BIT_REG_MASK          ((uint16_t)0xFFFF)
+#define u8_BIT_REG_shift          (8)
 
 #define  FLAG_IS_SET	    (uint8_t)1
 #define  U8_ZERO_INITIALIZE (uint8_t)0

@@ -149,8 +149,9 @@ Std_ReturnType TIMERx_init(const Timer_Config_t *stPtr_a_Config)
 				CLEAR_REG(TIMSK);
 				CLEAR_REG(TIFR);
 				/*Configure initial value in TCNT1(high&low) for Timer0 to start count from it*/
-				TCNT1L =(stPtr_a_Config->timer_InitialValue) & U8_BIT_REG_MASK;
-				TCNT1H = (stPtr_a_Config->timer_InitialValue >> U8_BIT_REG_MASK) & U8_BIT_REG_MASK;
+				TCNT1L =(uint8_t)(stPtr_a_Config->timer_InitialValue) & U8_BIT_REG_MASK;
+
+				TCNT1H = (stPtr_a_Config->timer_InitialValue >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;
 				/*Configure the TIMER mode value and enable the interrupt for this mode*/
 				l_ret |= TIMERx_setTimerMode(stPtr_a_Config);
 				break;
@@ -206,7 +207,7 @@ Std_ReturnType TIMERx_setValue(const TimerType_t en_a_timer_type ,const uint16_t
 				
 			case Timer1:
 				TCNT1L = (uint8_t)(u16_a_timer_value) & U8_BIT_REG_MASK;
-				TCNT1H = (uint8_t)(u16_a_timer_value >> U8_BIT_REG_MASK) & U8_BIT_REG_MASK;		
+				TCNT1H = (uint8_t)(u16_a_timer_value >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;		
 				break;
 				
 			case Timer2:
@@ -238,7 +239,7 @@ Std_ReturnType TIMERx_CTC_SetCompare(const TimerType_t en_a_timer_type ,const ui
 				
 			case Timer1:
 				OCR1AL = (uint8_t)u16_a_compareValue & U8_BIT_REG_MASK;
-				OCR1AH = (uint8_t)(u16_a_compareValue >> U8_BIT_REG_MASK) & U8_BIT_REG_MASK;
+				OCR1AH = (u16_a_compareValue >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;
 				break;
 				
 			case Timer2:
@@ -710,7 +711,7 @@ static Std_ReturnType TIMERx_setTimerMode(const Timer_Config_t *stPtr_a_Config)
 						}
 						/*The Output Compare Register contains an 16-bit value that is continuously compared with the  counter value (TCNT1) */
 						OCR1AL = (uint8_t)stPtr_a_Config->timer_compare_MatchValue & U8_BIT_REG_MASK;
-						OCR1AH = (uint8_t)(stPtr_a_Config->timer_compare_MatchValue >> U8_BIT_REG_MASK) & U8_BIT_REG_MASK;
+						OCR1AH = (stPtr_a_Config->timer_compare_MatchValue >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;
 						break;
 						
 					case TIMER_FAST_PWM_MODE:
@@ -758,7 +759,7 @@ static Std_ReturnType TIMERx_setTimerMode(const Timer_Config_t *stPtr_a_Config)
 						}
 						/*The Output Compare Register contains an 16-bit value that is continuously compared with the  counter value (TCNT1) */
 						OCR1AL = (uint8_t)stPtr_a_Config->timer_compare_MatchValue & U8_BIT_REG_MASK;
-						OCR1AH = (uint8_t)(stPtr_a_Config->timer_compare_MatchValue >> U8_BIT_REG_MASK) & U8_BIT_REG_MASK;
+						OCR1AH = (stPtr_a_Config->timer_compare_MatchValue >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;
 						break;
 						
 					case TIMER_CTC_MODE:
@@ -807,7 +808,7 @@ static Std_ReturnType TIMERx_setTimerMode(const Timer_Config_t *stPtr_a_Config)
 						}
 					    /*The Output Compare Register contains an 16-bit value that is continuously compared with the  counter value (TCNT1) */
 						OCR1AL = stPtr_a_Config->timer_compare_MatchValue & U8_BIT_REG_MASK;
-						OCR1AH = (stPtr_a_Config->timer_compare_MatchValue >> U8_BIT_REG_MASK) & U8_BIT_REG_MASK;	
+						OCR1AH = (stPtr_a_Config->timer_compare_MatchValue >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;	
 						/* Enable Timer1 CTC-A mode interrupt*/
 						SET_BIT(TIMSK,OCIE1A);
 						break;
