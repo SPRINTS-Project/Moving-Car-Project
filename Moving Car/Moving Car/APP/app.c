@@ -10,16 +10,6 @@
 #include <avr/io.h>
 
 
-/*
-enum en_dioPorts
-{
-	porta, portb, portc, portd
-};
-enum en_dioPins
-{
-	pin0, pin1, pin2, pin3, pin4, pin5, pin6, pin7
-};
-*/
 
 
 static uint8_t u8_gs_v_progState = BTN_STOP;
@@ -49,32 +39,35 @@ const ST_motor_t st_gc_motorConfig[]={
 	};
 
 
-uint8_t volatile u8_gv_delay = 0; 
 
-
-ISR(TIMER1_OVF)
-{
-	u8_gv_delay++;
-	
-	TCNT1 = 61629;		// 500 ms with prescaler 1024 and F_CPU = 8M
-}
-
-ISR(TIMER0_OVF)
-{
-	u8_gv_delay++;
-	
-	TCNT1 = 61629;		// 500 ms with prescaler 1024 and F_CPU = 8M
-}
-
-
-ISR(EXT_INT0)
-{
-	u8_gv_delay = 0;
-	u8_gs_v_progState = BTN_STOP;
-	
-}
 
 void APP_init(void);
+void APP_timer0OvfHandeler(void);
+void APP_timer1OvfHandeler(void);
+void APP_extInt0OvfHandeler(void);
+
+
+
+uint8_t volatile u8_gv_delay = 0; 
+uint8_t volatile u8_gv_pwm = 0;
+
+/*ISR(TIMER1_OVF)
+{
+	APP_timer1OvfHandeler();
+}*/
+
+/*ISR(TIMER0_OVF)
+{
+	APP_timer0OvfHandeler();
+}*/
+
+
+/*ISR(EXT_INT0)
+{
+	APP_extInt0OvfHandeler();
+}*/
+
+
 
 
 void APP_start(void)
@@ -89,7 +82,9 @@ void APP_start(void)
 		BUTTON_mainTask();
 		while (u8_gs_v_progState == BTN_STOP)
 		{
-			TCCR1B = 0;						// stop timer 1
+			ext_disable(EXT_0);
+			//TCCR1B = 0;						// stop timer 1
+			TIMER_MANGER_stop(Timer1);
 			BUTTON_mainTask();
 			
 			
@@ -112,7 +107,9 @@ void APP_start(void)
 		}
 		while (u8_gs_v_progState == BTN_START)
 		{
-			TCCR1B = 1<< CS10 | 1<<CS12;								// start timer 1
+			ext_enable(EXT_0);
+			//TCCR1B = 1<< CS10 | 1<<CS12;								// start timer 1
+			TIMER_MANGER_start(F_CPU_1024,Timer1);
 			if (u8_gv_delay>= 2)										// 1s delay
 			{
 				if (u8_gv_delay <= 8 )									// longest side for 3s with speed 50%
@@ -122,7 +119,20 @@ void APP_start(void)
 					LED_on(st_gc_ledsConfig[LED_LONG_SIDE].u8_a_port , st_gc_ledsConfig[LED_LONG_SIDE].u8_a_pin);
 					LED_off(st_gc_ledsConfig[LED_ROTATE].u8_a_port , st_gc_ledsConfig[LED_ROTATE].u8_a_pin);
 					LED_off(st_gc_ledsConfig[LED_STOP].u8_a_port , st_gc_ledsConfig[LED_STOP].u8_a_pin);
-					CAR_FORWARD(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
+					
+					u8_gv_pwm = 0;
+					//TCCR0 = 1<<CS02;									// start timer 0
+					TIMER_MANGER_start(F_CPU_1024,Timer0);
+					while (u8_gv_pwm <= 5)
+					{
+						CAR_FORWARD(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
+					}
+					while (u8_gv_pwm > 5 && u8_gv_pwm <= 10)
+					{
+						CAR_STOP(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
+					}
+					TIMER_MANGER_stop(Timer0);										// stop timer 0
+					u8_gv_pwm = 0;
 				}
 				else if (u8_gv_delay>8 && u8_gv_delay <=9)				// stop for 0.5		
 				{
@@ -143,6 +153,19 @@ void APP_start(void)
 					LED_off(st_gc_ledsConfig[LED_LONG_SIDE].u8_a_port , st_gc_ledsConfig[LED_LONG_SIDE].u8_a_pin);
 					LED_on(st_gc_ledsConfig[LED_ROTATE].u8_a_port , st_gc_ledsConfig[LED_ROTATE].u8_a_pin);
 					LED_off(st_gc_ledsConfig[LED_STOP].u8_a_port , st_gc_ledsConfig[LED_STOP].u8_a_pin);
+					
+					u8_gv_pwm = 0;
+					TIMER_MANGER_start(F_CPU_1024,Timer0);									// start timer 0
+					while (u8_gv_pwm <= 5)
+					{
+						CAR_REVERSE_RIGHT(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
+					}
+					while (u8_gv_pwm > 5 && u8_gv_pwm <= 10)
+					{
+						CAR_STOP(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
+					}
+					TIMER_MANGER_stop(Timer0);										// stop timer 0
+					u8_gv_pwm = 0;
 				}
 				else if (u8_gv_delay > 10 && u8_gv_delay <=11)			// Stop the car for 0.5 s
 				{
@@ -164,6 +187,21 @@ void APP_start(void)
 					LED_off(st_gc_ledsConfig[LED_LONG_SIDE].u8_a_port , st_gc_ledsConfig[LED_LONG_SIDE].u8_a_pin);
 					LED_off(st_gc_ledsConfig[LED_ROTATE].u8_a_port , st_gc_ledsConfig[LED_ROTATE].u8_a_pin);
 					LED_off(st_gc_ledsConfig[LED_STOP].u8_a_port , st_gc_ledsConfig[LED_STOP].u8_a_pin);
+					
+					
+					
+					u8_gv_pwm = 0;
+					TIMER_MANGER_start(F_CPU_1024,Timer0);									// start timer 0
+					while (u8_gv_pwm <= 3)
+					{
+						CAR_FORWARD(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
+					}
+					while (u8_gv_pwm > 3 && u8_gv_pwm <= 10)
+					{
+						CAR_STOP(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
+					}
+					TIMER_MANGER_stop(Timer0);										// stop timer 0
+					u8_gv_pwm = 0;
 				}
 				else if (u8_gv_delay>15 && u8_gv_delay <=16)				// stop for 0.5		
 				{
@@ -185,6 +223,19 @@ void APP_start(void)
 					LED_off(st_gc_ledsConfig[LED_LONG_SIDE].u8_a_port , st_gc_ledsConfig[LED_LONG_SIDE].u8_a_pin);
 					LED_on(st_gc_ledsConfig[LED_ROTATE].u8_a_port , st_gc_ledsConfig[LED_ROTATE].u8_a_pin);
 					LED_off(st_gc_ledsConfig[LED_STOP].u8_a_port , st_gc_ledsConfig[LED_STOP].u8_a_pin);
+					
+					u8_gv_pwm = 0;
+					TIMER_MANGER_start(F_CPU_1024,Timer0);									// start timer 0
+					while (u8_gv_pwm <= 5)
+					{
+						CAR_REVERSE_RIGHT(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
+					}
+					while (u8_gv_pwm > 5 && u8_gv_pwm <= 10)
+					{
+						CAR_STOP(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
+					}
+					TIMER_MANGER_stop(Timer0);										// stop timer 0
+					u8_gv_pwm = 0;
 				}
 				else if (u8_gv_delay > 17 && u8_gv_delay <=18)			// Stop the car for 0.5 s
 				{
@@ -225,22 +276,54 @@ void APP_init(void)
 		CAR_INIT(&st_gc_motorConfig[u8_index],&st_gc_motorConfig[u8_index+1]);
 	}
 	
-	/*TimerManger_config_t timer1;
-	timer1.timer_num = 1;
-	timer1.timer_mode = 0;
-	timer1.timer_InitialValue = 61629;
-	TIMER_MANGER_init(&timer1);*/
+	TimerManger_config_t st_l_timer1;
+	st_l_timer1.timer_num = Timer1;
+	st_l_timer1.timer_mode = TIMER_NORMAL_MODE;
+	st_l_timer1.timer_InitialValue = APP_TIMER_1_INIT_VALUE;
+	st_l_timer1.call_back_function = APP_timer1OvfHandeler;
+	TIMER_MANGER_init(&st_l_timer1);
 	
 	
-	GICR = 1<<INT0;
-	MCUCR = 1<<ISC01;
+	TimerManger_config_t st_l_timer0;
+	st_l_timer0.timer_num = Timer0;
+	st_l_timer0.timer_mode = TIMER_NORMAL_MODE;
+	st_l_timer0.timer_InitialValue = APP_TIMER_0_INIT_VALUE;
+	st_l_timer0.call_back_function = APP_timer0OvfHandeler;
+	TIMER_MANGER_init(&st_l_timer0);
 	
 	
-	TCCR1A = 0x00;
+	ext_interrupt_config_t st_l_int0Config ;
+	st_l_int0Config.ext_interrupt_no = EXT_0;
+	st_l_int0Config.edge_select = FALLING_EDGE;
+	ext_init(&st_l_int0Config,APP_extInt0OvfHandeler);
+	//ext_enable(EXT_0);
 	
-	TIMSK = 1 << TOIE1;
-	TCNT1 = 61629;
+	/*GICR = 1<<INT0;
+	MCUCR = 1<<ISC01;*/
 	
 	
 	sei();
+}
+
+
+
+void APP_timer0OvfHandeler(void)
+{
+	u8_gv_pwm++;
+	
+	TCNT0 = 240;		// 2 ms with prescaler 1024 and F_CPU = 8M
+}
+
+void APP_timer1OvfHandeler(void)
+{
+	u8_gv_delay++;
+	
+	TCNT1 = 61629;		// 500 ms with prescaler 1024 and F_CPU = 8M
+}
+
+void APP_extInt0OvfHandeler(void)
+{
+	u8_gv_delay = 0;
+	u8_gv_pwm = 0 ;
+	u8_gs_v_progState = BTN_STOP;
 }

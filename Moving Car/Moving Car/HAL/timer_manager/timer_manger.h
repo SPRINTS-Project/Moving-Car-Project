@@ -12,7 +12,7 @@
 /**********************************  section 1: Includes ********************************************************/
 #include "../../MCAL/timer/timer.h"
 
-typedef volatile  void (*Fptr) (void);
+typedef  void (*Fptr) (void);
 /**********************************  section 2: Macro Declarations ***********************************************/
 #define  INTIALIZE_TIMER_WITH_ZERO   (0)
 #define  OVERFLOW_COUNT_FOR_ONE_SEC  (30U)

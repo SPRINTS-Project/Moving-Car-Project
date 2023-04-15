@@ -14,12 +14,17 @@
 #include "../HAL/led/led.h"
 #include "../HAL/EXT_interrupt_manager/ext_interrupt_manager.h"
 #include "../HAL/car control/car_control.h"
+#include "../HAL/timer_manager/timer_manger.h"
 //#include "../MCAL/EXT_Interrupt/interrupt.h"
 //#include <avr/interrupt.h>
 
 
 #define BTN_START		0x00
 #define BTN_STOP		0x01
+
+
+#define APP_TIMER_1_INIT_VALUE		61628
+#define APP_TIMER_0_INIT_VALUE		240
 
 // Create LED ID ENUM
 typedef uint8_t u8_en_ledIdType;

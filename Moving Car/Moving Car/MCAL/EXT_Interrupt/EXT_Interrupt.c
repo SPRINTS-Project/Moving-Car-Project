@@ -105,11 +105,11 @@ u8_en_interruptErrorType ext_interrupt_set_callback_init(ext_interrupt_no_t ext_
 *-interrupt service routine for  external interrupt 0
 *
 */
-/*ISR(EXT_INT0)
+ISR(EXT_INT0)
 {
-	callback_int0();
+	callback_EXT_0();
 }
-*/
+
 
 /*
 *   -Description-
