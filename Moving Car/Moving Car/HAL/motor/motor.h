@@ -24,6 +24,7 @@ typedef enum EN_motor_error_t
     MOTOR_NOK
 }EN_motor_error_t;
 	
+#define NULL ((void*)0)	
 /*************************************************************APIs prototypes*******************************************************************/
 
 
