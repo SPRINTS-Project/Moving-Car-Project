@@ -100,9 +100,7 @@ void APP_start(void)
 			
 			
 			// Here We Will STOP motors
-			
-			// Here Stop timer 1
-			
+			CAR_STOP(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
 			
 			btnState = BUTTON_getState(st_gc_btn_config[0].u8_a_ID);
 			
@@ -124,6 +122,7 @@ void APP_start(void)
 					LED_on(st_gc_ledsConfig[LED_LONG_SIDE].u8_a_port , st_gc_ledsConfig[LED_LONG_SIDE].u8_a_pin);
 					LED_off(st_gc_ledsConfig[LED_ROTATE].u8_a_port , st_gc_ledsConfig[LED_ROTATE].u8_a_pin);
 					LED_off(st_gc_ledsConfig[LED_STOP].u8_a_port , st_gc_ledsConfig[LED_STOP].u8_a_pin);
+					CAR_FORWARD(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
 				}
 				else if (u8_gv_delay>8 && u8_gv_delay <=9)				// stop for 0.5		
 				{
@@ -134,7 +133,7 @@ void APP_start(void)
 					LED_on(st_gc_ledsConfig[LED_STOP].u8_a_port , st_gc_ledsConfig[LED_STOP].u8_a_pin);
 					
 					// Here We Will STOP motors
-					
+					CAR_STOP(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
 					
 				}
 				else if (u8_gv_delay >9 && u8_gv_delay <=10)			// rotate 90 degree to right
@@ -154,7 +153,7 @@ void APP_start(void)
 					LED_on(st_gc_ledsConfig[LED_STOP].u8_a_port , st_gc_ledsConfig[LED_STOP].u8_a_pin);
 					
 					// Here We Will STOP motors
-					
+					CAR_STOP(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
 					
 					
 				}
@@ -175,7 +174,7 @@ void APP_start(void)
 					LED_on(st_gc_ledsConfig[LED_STOP].u8_a_port , st_gc_ledsConfig[LED_STOP].u8_a_pin);
 					
 					// Here We Will STOP motors
-					
+					CAR_STOP(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
 					
 					
 				}
@@ -196,7 +195,7 @@ void APP_start(void)
 					LED_on(st_gc_ledsConfig[LED_STOP].u8_a_port , st_gc_ledsConfig[LED_STOP].u8_a_pin);
 					
 					// Here We Will STOP motors
-					
+					CAR_STOP(&st_gc_motorConfig[0],&st_gc_motorConfig[1]);
 					
 				}
 				else{
@@ -218,10 +217,13 @@ void APP_init(void)
 	
 	for (uint8_t u8_index = 0 ; u8_index < 2 ; u8_index++)
 	{
-		BUTTON_init(portd,st_gc_btn_config[u8_index].u8_a_pin,st_gc_btn_config[u8_index].u8_a_ID);
+		BUTTON_init(st_gc_btn_config[u8_index].u8_a_port,st_gc_btn_config[u8_index].u8_a_pin,st_gc_btn_config[u8_index].u8_a_ID);
 	}
 	
-	
+	for (uint8_t u8_index = 0 ; u8_index < 2 ; u8_index+=2)
+	{
+		CAR_INIT(&st_gc_motorConfig[u8_index],&st_gc_motorConfig[u8_index+1]);
+	}
 	
 	/*TimerManger_config_t timer1;
 	timer1.timer_num = 1;
