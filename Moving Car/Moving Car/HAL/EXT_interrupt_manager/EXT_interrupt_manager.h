@@ -1,6 +1,6 @@
 #ifndef EXT_INTERRUPT_MANAGER_H
 #define EXT_INTERRUPT_MANAGER_H
-#include "../ext_interrupt/ext_interrupt.h"
+#include "../../MCAL/ext_interrupt/ext_interrupt.h"
 
 
 typedef struct 
@@ -8,6 +8,10 @@ typedef struct
 ext_interrupt_no_t ext_interrupt_no;
 EDGE_detection_t edge_select;
 }ext_interrupt_config_t;
+
+
+
+
 
 /*
 *   -Description-
@@ -22,9 +26,9 @@ EDGE_detection_t edge_select;
 *
 *   -Return cases-
 *-1- (E_NOK) if there is something wrong
-*-2- (E_OK) otherwise
+*-0- (E_OK) otherwise
 */
-STD_return_t ext_init(ext_interrupt_config_t *ext_interrupt_config, void(*callback)(void));
+u8_en_interruptErrorType ext_init(ext_interrupt_config_t *ext_interrupt_config, void(*callback)(void));
 
 /*
 *   -Description-
@@ -39,9 +43,9 @@ STD_return_t ext_init(ext_interrupt_config_t *ext_interrupt_config, void(*callba
 *
 *   -Return cases-
 *-1- (E_NOK) if there is something wrong
-*-2- (E_OK) otherwise
+*-0- (E_OK) otherwise
 */
-STD_return_t ext_enable(ext_interrupt_config_t *ext_interrupt_config);
+u8_en_interruptErrorType ext_enable(ext_interrupt_config_t *ext_interrupt_config);
 
 /*
 *   -Description-
@@ -56,7 +60,7 @@ STD_return_t ext_enable(ext_interrupt_config_t *ext_interrupt_config);
 *
 *   -Return cases-
 *-1- (E_NOK) if there is something wrong
-*-2- (E_OK) otherwise
+*-0- (E_OK) otherwise
 */
-STD_return_t ext_disable(ext_interrupt_config_t *ext_interrupt_config);
+u8_en_interruptErrorType ext_disable(ext_interrupt_config_t *ext_interrupt_config);
 #endif

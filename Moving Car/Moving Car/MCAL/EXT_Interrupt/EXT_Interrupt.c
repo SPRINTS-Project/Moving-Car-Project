@@ -2,8 +2,8 @@
 static void (*callback_EXT_0)(void);
 static void (*callback_EXT_1)(void);
 
-STD_return_t ext_interrupt_init(ext_interrupt_no_t ext_interrupt_no, EDGE_detection_t EDGE_detection){
-    STD_return ret_val=ok;
+u8_en_interruptErrorType ext_interrupt_init(ext_interrupt_no_t ext_interrupt_no, EDGE_detection_t EDGE_detection){
+    u8_en_interruptErrorType ret_val=INT_E_OK;
     switch (ext_interrupt_no)
     {
     case EXT_0:
@@ -26,8 +26,8 @@ STD_return_t ext_interrupt_init(ext_interrupt_no_t ext_interrupt_no, EDGE_detect
 
     return ret_val;
 }
-STD_return_t ext_interrupt_enable(ext_interrupt_no_t ext_interrupt_no){
-    STD_return ret_val=ok;
+u8_en_interruptErrorType ext_interrupt_enable(ext_interrupt_no_t ext_interrupt_no){
+    u8_en_interruptErrorType ret_val=INT_E_OK;
     switch (ext_interrupt_no)
     {
     case EXT_0:
@@ -50,8 +50,8 @@ STD_return_t ext_interrupt_enable(ext_interrupt_no_t ext_interrupt_no){
     }
     return ret_val;
 }
-STD_return_t ext_interrupt_disable(ext_interrupt_no_t ext_interrupt_no){
-    STD_return ret_val=ok;
+u8_en_interruptErrorType ext_interrupt_disable(ext_interrupt_no_t ext_interrupt_no){
+    u8_en_interruptErrorType ret_val=INT_E_OK;
     switch (ext_interrupt_no)
     {
     case EXT_0:
@@ -75,8 +75,8 @@ STD_return_t ext_interrupt_disable(ext_interrupt_no_t ext_interrupt_no){
 
 }
 
-STD_return_t ext_interrupt_set_callback_init(ext_interrupt_no_t ext_interrupt_no ,void(*callback)(void)){
-    STD_return ret_val=ok;
+u8_en_interruptErrorType ext_interrupt_set_callback_init(ext_interrupt_no_t ext_interrupt_no ,void(*callback)(void)){
+    u8_en_interruptErrorType ret_val=INT_E_OK;
     switch (ext_interrupt_no)
     {
     case EXT_0:
@@ -105,28 +105,28 @@ STD_return_t ext_interrupt_set_callback_init(ext_interrupt_no_t ext_interrupt_no
 *-interrupt service routine for  external interrupt 0
 *
 */
-ISR(EXT_INT0)
+/*ISR(EXT_INT0)
 {
 	callback_int0();
 }
-
+*/
 
 /*
 *   -Description-
 *-interrupt service routine for  external interrupt10
 *
 */
-ISR(EXT_INT1)
+/*ISR(EXT_INT1)
 {
 	callback_int1();
 }
-
+*/
 /*
 *   -Description-
 *-interrupt service routine for  external interrupt 2
 *
 */
-ISR(EXT_INT2)
+/*ISR(EXT_INT2)
 {
 	callback_int2();
-}
+}*/

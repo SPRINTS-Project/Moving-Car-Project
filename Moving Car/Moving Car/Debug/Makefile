@@ -33,6 +33,7 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
+../HAL/ext_interrupt_manager \
 ../HAL/led \
 ../HAL/button \
 ../HAL/motor \
@@ -42,16 +43,19 @@ SUBDIRS :=  \
 ../HAL \
 ../APP \
 ../MCAL/dio \
-../MCAL/interrupt \
+../MCAL/ext_interrupt \
 ../MCAL/timer
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../APP/app.c \
 ../HAL/button/button.c \
+../HAL/ext_interrupt_manager/ext_interrupt_manager.c \
 ../HAL/led/led.c \
 ../main.c \
-../MCAL/dio/dio.c
+../MCAL/dio/dio.c \
+../MCAL/ext_interrupt/ext_interrupt.c
 
 
 PREPROCESSING_SRCS += 
@@ -61,28 +65,40 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+APP/app.o \
 HAL/button/button.o \
+HAL/ext_interrupt_manager/ext_interrupt_manager.o \
 HAL/led/led.o \
 main.o \
-MCAL/dio/dio.o
+MCAL/dio/dio.o \
+MCAL/ext_interrupt/ext_interrupt.o
 
 OBJS_AS_ARGS +=  \
+APP/app.o \
 HAL/button/button.o \
+HAL/ext_interrupt_manager/ext_interrupt_manager.o \
 HAL/led/led.o \
 main.o \
-MCAL/dio/dio.o
+MCAL/dio/dio.o \
+MCAL/ext_interrupt/ext_interrupt.o
 
 C_DEPS +=  \
+APP/app.d \
 HAL/button/button.d \
+HAL/ext_interrupt_manager/ext_interrupt_manager.d \
 HAL/led/led.d \
 main.d \
-MCAL/dio/dio.d
+MCAL/dio/dio.d \
+MCAL/ext_interrupt/ext_interrupt.d
 
 C_DEPS_AS_ARGS +=  \
+APP/app.d \
 HAL/button/button.d \
+HAL/ext_interrupt_manager/ext_interrupt_manager.d \
 HAL/led/led.d \
 main.d \
-MCAL/dio/dio.d
+MCAL/dio/dio.d \
+MCAL/ext_interrupt/ext_interrupt.d
 
 OUTPUT_FILE_PATH +=Moving\ Car.elf
 
@@ -98,7 +114,21 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+APP/app.o: ../APP/app.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 HAL/button/button.o: ../HAL/button/button.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+HAL/ext_interrupt_manager/ext_interrupt_manager.o: ../HAL/ext_interrupt_manager/ext_interrupt_manager.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -120,6 +150,13 @@ HAL/led/led.o: ../HAL/led/led.c
 	
 
 MCAL/dio/dio.o: ../MCAL/dio/dio.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/ext_interrupt/ext_interrupt.o: ../MCAL/ext_interrupt/ext_interrupt.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

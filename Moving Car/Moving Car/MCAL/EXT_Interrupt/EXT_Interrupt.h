@@ -2,7 +2,13 @@
 #define EXT_INTERRUPT_H
 
 #include "../ext_interrupt/interrupt.h"
-#include "../../utilities/STD_TYPES.h"
+//#include "../../utilities/STD_TYPES.h"
+#include <stdint.h>
+
+typedef uint8_t u8_en_interruptErrorType;
+
+#define INT_E_OK			((u8_en_interruptErrorType)0x00)
+#define INT_E_NOK			((u8_en_interruptErrorType)0x01)
 
 #define GICR_ADD			 (*((volatile uint8_t *) 0x5B)) 
 #define INT0_Globle		6
@@ -30,6 +36,8 @@ typedef enum{
 
 }EDGE_detection_t;
 
+
+
 /*
 *   -Description-
 *-this function INIT the external interrupt configuration
@@ -45,7 +53,7 @@ typedef enum{
 *-1- (E_NOK) if there is something wrong
 *-2- (E_OK) otherwise
 */
-STD_return_t ext_interrupt_init(ext_interrupt_no_t ext_interrupt_no, EDGE_detection_t EDGE_detection);
+u8_en_interruptErrorType ext_interrupt_init(ext_interrupt_no_t ext_interrupt_no, EDGE_detection_t EDGE_detection);
 
 /*
 *   -Description-
@@ -60,9 +68,9 @@ STD_return_t ext_interrupt_init(ext_interrupt_no_t ext_interrupt_no, EDGE_detect
 *
 *   -Return cases-
 *-1- (E_NOK) if there is something wrong
-*-2- (E_OK) otherwise
+*-0- (E_OK) otherwise
 */
-STD_return_t ext_interrupt_enable(ext_interrupt_no_t ext_interrupt_no);
+u8_en_interruptErrorType ext_interrupt_enable(ext_interrupt_no_t ext_interrupt_no);
 
 /*
 *   -Description-
@@ -77,9 +85,9 @@ STD_return_t ext_interrupt_enable(ext_interrupt_no_t ext_interrupt_no);
 *
 *   -Return cases-
 *-1- (E_NOK) if there is something wrong
-*-2- (E_OK) otherwise
+*-0- (E_OK) otherwise
 */
-STD_return_t ext_interrupt_disable(ext_interrupt_no_t ext_interrupt_no);
+u8_en_interruptErrorType ext_interrupt_disable(ext_interrupt_no_t ext_interrupt_no);
 
 
 /*
@@ -94,8 +102,8 @@ STD_return_t ext_interrupt_disable(ext_interrupt_no_t ext_interrupt_no);
 *
 *   -Return cases-
 *-1- (E_NOK) if there is something wrong
-*-2- (E_OK) otherwise
+*-0- (E_OK) otherwise
 */
-STD_return_t ext_interrupt_set_callback_init(ext_interrupt_no_t ext_interrupt_no ,void(*callback)(void));
+u8_en_interruptErrorType ext_interrupt_set_callback_init(ext_interrupt_no_t ext_interrupt_no ,void(*callback)(void));
 
 #endif
