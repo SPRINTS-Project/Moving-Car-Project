@@ -12,7 +12,7 @@
 #include "button_types.h"
 
 void BUTTON_mainTask(void);
-void BUTTON_init(void);
+u8_en_btnStateType BUTTON_init(uint8_t u8_a_port , uint8_t u8_a_pin, u8_en_btnIdType en_btnId);
 u8_en_btnStateType BUTTON_getState(u8_en_btnIdType en_btnId);
 
 

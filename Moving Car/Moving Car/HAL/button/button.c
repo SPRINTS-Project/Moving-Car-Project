@@ -16,7 +16,6 @@
 #define BUTTONS_NUM					 1U
 
 const st_btnConfigType st_gc_btnConfig[BUTTONS_NUM] = {{
-	{portd,pin0},																			// Button_1 Channel ID
 	BUTTON_DEBOUNCE_THRESHOLD,																// Button_1 Debounce Threshold
 	BUTTON_HOLD_THRESHOLD																	// Button_1 Hold Threshold
 }
@@ -60,11 +59,20 @@ void BUTTON_mainTask(void)
 		vidUpdateBtnState((u8_en_btnIdType)u8Index);
 	}
 }
-void BUTTON_init(void)
+u8_en_btnStateType BUTTON_init(uint8_t u8_a_port , uint8_t u8_a_pin, u8_en_btnIdType en_btnId)
 {
-	uint8_t u8Index;
+	uint8_t u8_RetVal;
+	// Set button pin as input
+	u8_RetVal = DIO_init(u8_a_port, u8_a_pin , STD_INPUT);
 	
-	for(u8Index=0;u8Index<BUTTONS_NUM;u8Index++)
+	// Enable PULLUP
+	u8_RetVal = DIO_writePIN(u8_a_port, u8_a_pin, STD_HIGH);
+	
+	st_gs_strBtnInfo[en_btnId].u8_a_btnState     = BT_PRE_PUSH;
+	st_gs_strBtnInfo[en_btnId].u8_a_debounceThreshold  = ((uint8_t)0U);
+	st_gs_strBtnInfo[en_btnId].u8_a_holdThreshold      = ((uint8_t)0U);
+	
+	/*for(u8Index=0;u8Index<BUTTONS_NUM;u8Index++)
 	{
 		// Set button pin as input
 		DIO_init((st_gc_btnConfig[u8Index].u8_a_channelId[0]), (st_gc_btnConfig[u8Index].u8_a_channelId[1]) , STD_INPUT);
@@ -72,9 +80,17 @@ void BUTTON_init(void)
 		// Enable PULLUP
 		DIO_writePIN((st_gc_btnConfig[u8Index].u8_a_channelId[0]), (st_gc_btnConfig[u8Index].u8_a_channelId[1]), STD_HIGH);
 		
-		st_gs_strBtnInfo[u8Index].u8_a_btnState     = BT_RELEASED;
+		st_gs_strBtnInfo[u8Index].u8_a_btnState     = BT_PRE_PUSH;
 		st_gs_strBtnInfo[u8Index].u8_a_debounceThreshold  = ((uint8_t)0U);
 		st_gs_strBtnInfo[u8Index].u8_a_holdThreshold      = ((uint8_t)0U);
+	}*/
+	if (u8_RetVal == DIO_E_OK)
+	{
+		return BT_PRE_PUSH;
+	}
+	else
+	{
+		return BT_UNDEFINED;
 	}
 }
 u8_en_btnStateType BUTTON_getState(u8_en_btnIdType en_btnId)

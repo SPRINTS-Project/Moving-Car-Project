@@ -7,7 +7,7 @@
  */ 
 #include "led.h"
 #include "../../MCAL/dio/dio.h"
-
+/*
 #define  LED_NUMs		4
 
 const st_ledConfigType st_gc_ledConfig[LED_NUMs]={
@@ -20,44 +20,20 @@ const st_ledConfigType st_gc_ledConfig[LED_NUMs]={
 	{{portb,pin3},							// LED_4 Channel ID
 	LED_OFF}								// LED_4 State
 };
+*/
 
-
-void led_Init(void)
+u8_en_ledErrorType led_Init(uint8_t u8_a_port , uint8_t u8_a_pin)
 {
-	uint8_t u8_index;
-	
-	for (u8_index = 0 ; u8_index < LED_NUMs ; u8_index++)
-	{
-		DIO_init((st_gc_ledConfig[u8_index].u8_a_ledChannelID[0]), (st_gc_ledConfig[u8_index].u8_a_ledChannelID[1]) , STD_OUTPUT);
-		if (st_gc_ledConfig[u8_index].u8_a_ledState == LED_ON)
-		{
-			LED_on(u8_index+1);
-		}
-		else
-		{
-			LED_off(u8_index+1);
-		}
-		
-	}
+	return DIO_init(u8_a_port, u8_a_pin, STD_OUTPUT);
 }
 
 
 
-u8_en_ledErrorType LED_off(u8_en_ledIdType led)
+u8_en_ledErrorType LED_off(uint8_t u8_a_port , uint8_t u8_a_pin)
 {
-	if(led > LED_NUMs)
-	{
-		return LED_UNDEFINED;
-	}
-	DIO_writePIN((st_gc_ledConfig[led].u8_a_ledChannelID[0]), (st_gc_ledConfig[led].u8_a_ledChannelID[1]) ,LED_OFF);
-	return  LED_OK;
+	return DIO_writePIN(u8_a_port,u8_a_pin ,LED_OFF);
 }
-u8_en_ledErrorType LED_on(u8_en_ledIdType led)
+u8_en_ledErrorType LED_on(uint8_t u8_a_port , uint8_t u8_a_pin)
 {
-	if(led > LED_NUMs)
-	{
-		return LED_UNDEFINED;
-	}
-	DIO_writePIN((st_gc_ledConfig[led].u8_a_ledChannelID[0]), (st_gc_ledConfig[led].u8_a_ledChannelID[1]) ,LED_ON);
-	return  LED_OK;
+	return DIO_writePIN(u8_a_port,u8_a_pin ,LED_ON);
 }

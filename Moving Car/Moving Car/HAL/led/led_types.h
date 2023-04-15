@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-
+/*
 // Create LED ID ENUM
 typedef uint8_t u8_en_ledIdType;
 
@@ -21,7 +21,7 @@ typedef uint8_t u8_en_ledIdType;
 #define LED_3		((u8_en_ledIdType)0x03)
 #define	LED_4		((u8_en_ledIdType)0x04)
 
-
+*/
 
 // Create LED state ENUM
 typedef uint8_t u8_en_ledStateType;
