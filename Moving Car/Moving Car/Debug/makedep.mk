@@ -16,9 +16,15 @@ HAL\led\led.c
 
 HAL\motor\motor.c
 
+HAL\timer_manager\timer_manger.c
+
 main.c
 
 MCAL\dio\dio.c
 
 MCAL\ext_interrupt\ext_interrupt.c
+
+MCAL\timer\timer.c
+
+MCAL\timer\timer_manger.c
 

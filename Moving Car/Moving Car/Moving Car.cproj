@@ -165,6 +165,12 @@
     <Compile Include="HAL\motor\motor.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\timer_manager\timer_manger.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\timer_manager\timer_manger.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -181,6 +187,15 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\ext_interrupt\interrupt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer\timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer\timer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer\timer_manger.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
