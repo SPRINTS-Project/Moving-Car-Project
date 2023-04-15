@@ -1,4 +1,4 @@
-#include "EXT_Interrupt.h"
+#include "ext_interrupt.h"
 static void (*callback_EXT_0)(void);
 static void (*callback_EXT_1)(void);
 

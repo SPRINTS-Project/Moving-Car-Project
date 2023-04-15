@@ -1,6 +1,6 @@
 #ifndef EXT_INTERRUPT_MANAGER_H
 #define EXT_INTERRUPT_MANAGER_H
-#include "../EXT_Interrupt/EXT_Interrupt.h"
+#include "../ext_interrupt/ext_interrupt.h"
 
 
 typedef struct 

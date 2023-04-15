@@ -1,7 +1,7 @@
 #ifndef EXT_INTERRUPT_H
 #define EXT_INTERRUPT_H
 
-#include "../interrupt.h"
+#include "../ext_interrupt/interrupt.h"
 #include "../../utilities/STD_TYPES.h"
 
 #define GICR_ADD			 (*((volatile uint8_t *) 0x5B)) 
@@ -32,11 +32,11 @@ typedef enum{
 
 /*
 *   -Description-
-*-this function init the external interrupt configuration
+*-this function INIT the external interrupt configuration
 *
 *   -Input Output parameters -
 *-1-it is interrupt number  (ext_interrupt_no_t ext_interrupt_no)
-*-2-it is the unterrupt condition   (EDGE_detection_t EDGE_detection)
+*-2-it is the interrupt condition   (EDGE_detection_t EDGE_detection)
 *
 *   -Return-
 *   STD_return_t
