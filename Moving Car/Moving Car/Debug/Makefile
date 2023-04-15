@@ -33,11 +33,7 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
-<<<<<<< HEAD
 ../HAL/ext_interrupt_manager \
-=======
-../HAL/car\ control/ \
->>>>>>> basel
 ../HAL/led \
 ../HAL/button \
 ../HAL/motor \
@@ -55,14 +51,8 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../APP/app.c \
 ../HAL/button/button.c \
-<<<<<<< HEAD
 ../HAL/ext_interrupt_manager/ext_interrupt_manager.c \
-=======
-../HAL/car\ control/cartest.c \
-../HAL/car\ control/car_control.c \
->>>>>>> basel
 ../HAL/led/led.c \
-../HAL/motor/motor.c \
 ../main.c \
 ../MCAL/dio/dio.c \
 ../MCAL/ext_interrupt/ext_interrupt.c
@@ -77,14 +67,8 @@ ASM_SRCS +=
 OBJS +=  \
 APP/app.o \
 HAL/button/button.o \
-<<<<<<< HEAD
 HAL/ext_interrupt_manager/ext_interrupt_manager.o \
-=======
-HAL/car\ control/cartest.o \
-HAL/car\ control/car_control.o \
->>>>>>> basel
 HAL/led/led.o \
-HAL/motor/motor.o \
 main.o \
 MCAL/dio/dio.o \
 MCAL/ext_interrupt/ext_interrupt.o
@@ -92,14 +76,8 @@ MCAL/ext_interrupt/ext_interrupt.o
 OBJS_AS_ARGS +=  \
 APP/app.o \
 HAL/button/button.o \
-<<<<<<< HEAD
 HAL/ext_interrupt_manager/ext_interrupt_manager.o \
-=======
-"HAL/car control/cartest.o" \
-"HAL/car control/car_control.o" \
->>>>>>> basel
 HAL/led/led.o \
-HAL/motor/motor.o \
 main.o \
 MCAL/dio/dio.o \
 MCAL/ext_interrupt/ext_interrupt.o
@@ -107,14 +85,8 @@ MCAL/ext_interrupt/ext_interrupt.o
 C_DEPS +=  \
 APP/app.d \
 HAL/button/button.d \
-<<<<<<< HEAD
 HAL/ext_interrupt_manager/ext_interrupt_manager.d \
-=======
-HAL/car\ control/cartest.d \
-HAL/car\ control/car_control.d \
->>>>>>> basel
 HAL/led/led.d \
-HAL/motor/motor.d \
 main.d \
 MCAL/dio/dio.d \
 MCAL/ext_interrupt/ext_interrupt.d
@@ -122,14 +94,8 @@ MCAL/ext_interrupt/ext_interrupt.d
 C_DEPS_AS_ARGS +=  \
 APP/app.d \
 HAL/button/button.d \
-<<<<<<< HEAD
 HAL/ext_interrupt_manager/ext_interrupt_manager.d \
-=======
-"HAL/car control/cartest.d" \
-"HAL/car control/car_control.d" \
->>>>>>> basel
 HAL/led/led.d \
-HAL/motor/motor.d \
 main.d \
 MCAL/dio/dio.d \
 MCAL/ext_interrupt/ext_interrupt.d
@@ -162,18 +128,7 @@ HAL/button/button.o: ../HAL/button/button.c
 	@echo Finished building: $<
 	
 
-<<<<<<< HEAD
 HAL/ext_interrupt_manager/ext_interrupt_manager.o: ../HAL/ext_interrupt_manager/ext_interrupt_manager.c
-=======
-HAL/car\ control/cartest.o: ../HAL/car\ control/cartest.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-HAL/car\ control/car_control.o: ../HAL/car\ control/car_control.c
->>>>>>> basel
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -181,13 +136,6 @@ HAL/car\ control/car_control.o: ../HAL/car\ control/car_control.c
 	
 
 HAL/led/led.o: ../HAL/led/led.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-HAL/motor/motor.o: ../HAL/motor/motor.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
