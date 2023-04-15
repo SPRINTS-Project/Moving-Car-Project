@@ -6,9 +6,17 @@ APP\app.c
 
 HAL\button\button.c
 
+<<<<<<< HEAD
 HAL\ext_interrupt_manager\ext_interrupt_manager.c
+=======
+HAL\car control\cartest.c
+
+HAL\car control\car_control.c
+>>>>>>> basel
 
 HAL\led\led.c
+
+HAL\motor\motor.c
 
 main.c
 
