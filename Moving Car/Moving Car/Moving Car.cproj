@@ -198,6 +198,12 @@
     <Compile Include="MCAL\timer\timer_manger.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="STD_LIBRARIES\bit_math.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="STD_LIBRARIES\STD_TYPES.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="HAL\car control\" />
@@ -213,6 +219,7 @@
     <Folder Include="MCAL\dio" />
     <Folder Include="MCAL\ext_interrupt" />
     <Folder Include="MCAL\timer" />
+    <Folder Include="STD_LIBRARIES\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

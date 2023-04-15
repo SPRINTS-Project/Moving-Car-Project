@@ -45,7 +45,8 @@ SUBDIRS :=  \
 ../APP \
 ../MCAL/dio \
 ../MCAL/ext_interrupt \
-../MCAL/timer
+../MCAL/timer \
+../STD_LIBRARIES/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
