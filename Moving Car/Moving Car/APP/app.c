@@ -76,7 +76,7 @@ void APP_start(void)
 	
 	
 	TCCR1A = 0x00;
-	TCCR1B = 1<< CS10 | 1<<CS12;
+	
 	TIMSK = 1 << TOIE1;
 	TCNT1 = 61629;
 	
@@ -87,6 +87,7 @@ void APP_start(void)
 		BUTTON_mainTask();
 		while (u8_gs_v_progState == BTN_STOP)
 		{
+			TCCR1B = 0;						// stop timer 1
 			BUTTON_mainTask();
 			
 			
@@ -111,6 +112,7 @@ void APP_start(void)
 		}
 		while (u8_gs_v_progState == BTN_START)
 		{
+			TCCR1B = 1<< CS10 | 1<<CS12;								// start timer 1
 			if (u8_gv_delay>= 2)										// 1s delay
 			{
 				if (u8_gv_delay <= 8 )									// longest side for 3s with speed 50%
