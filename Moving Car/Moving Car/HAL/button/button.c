@@ -13,7 +13,7 @@
 
 #define BUTTON_DEBOUNCE_THRESHOLD    20
 #define BUTTON_HOLD_THRESHOLD		 20
-#define BUTTONS_NUM					 20U
+#define BUTTONS_NUM					 2U
 
 const st_btnConfigType st_gc_btnConfig = {
 	BUTTON_DEBOUNCE_THRESHOLD,																// Button_1 Debounce Threshold
@@ -151,30 +151,17 @@ static void vidUpdateBtnState(u8_en_btnIdType en_a_BtnId)
 }
 static void vidPrePushState(u8_en_btnIdType en_a_BtnId)
 {
-	uint8_t u8_BtnValue;
+	uint8_t u8BtnValue;
 	
-	DIO_readPIN((st_gs_strBtnInfo[en_a_BtnId].port), (st_gs_strBtnInfo[en_a_BtnId].pin),&u8_BtnValue);
+	DIO_readPIN((st_gs_strBtnInfo[en_a_BtnId].port), (st_gs_strBtnInfo[en_a_BtnId].pin),&u8BtnValue);
 	
-	if(u8_BtnValue == BT_RELEASE_LEVEL)
+	if(u8BtnValue == BT_RELEASE_LEVEL)
 	{
-		st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold++;
-		if (st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold>=st_gc_btnConfig.u8_a_debounceThreshold)
-		{
-			st_gs_strBtnInfo[en_a_BtnId].u8_a_btnState    = BT_PUSHED;
-			st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold = ((uint8_t)0);
-		}
+		st_gs_strBtnInfo[en_a_BtnId].u8_a_btnState    = BT_PUSHED;
 	}
 	else
 	{
-		if (st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold>=st_gc_btnConfig.u8_a_debounceThreshold)
-		{
-			st_gs_strBtnInfo[en_a_BtnId].u8_a_btnState = BT_RELEASED;
-			st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold = ((uint8_t)0);
-		}
-		else{
-			st_gs_strBtnInfo[en_a_BtnId].u8_a_btnState = BT_PRE_PUSH;
-			st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold = ((uint8_t)0);
-		}
+		st_gs_strBtnInfo[en_a_BtnId].u8_a_btnState    = BT_PRE_PUSH;
 	}
 }
 static void vidPushState(u8_en_btnIdType en_a_BtnId)
@@ -215,10 +202,10 @@ static void vidHoldState(u8_en_btnIdType en_a_BtnId)
 	
 	if(u8_BtnValue == BT_RELEASE_LEVEL)
 	{
-		st_gs_strBtnInfo[en_a_BtnId].u8_a_holdThreshold++;
-		if(st_gs_strBtnInfo[en_a_BtnId].u8_a_holdThreshold >= st_gc_btnConfig.u8_a_holdThreshold)
+		st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold++;
+		if(st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold >= st_gc_btnConfig.u8_a_debounceThreshold)
 		{
-			st_gs_strBtnInfo[en_a_BtnId].u8_a_holdThreshold = ((uint8_t)0);
+			st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold = ((uint8_t)0);
 			st_gs_strBtnInfo[en_a_BtnId].u8_a_btnState    = BT_PRE_RELEASE;
 		}
 		else
@@ -229,8 +216,7 @@ static void vidHoldState(u8_en_btnIdType en_a_BtnId)
 	}
 	else
 	{
-		st_gs_strBtnInfo[en_a_BtnId].u8_a_holdThreshold = ((uint8_t)0);
-		st_gs_strBtnInfo[en_a_BtnId].u8_a_btnState    = BT_RELEASED;
+		// do nothing
 	}
 }
 static void vidPreReleaseState(u8_en_btnIdType en_a_BtnId)
@@ -241,11 +227,19 @@ static void vidPreReleaseState(u8_en_btnIdType en_a_BtnId)
 	
 	if(u8_BtnValue == BT_RELEASE_LEVEL)
 	{
-		// Do nothing
+		st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold++;
 	}
 	else
 	{
-		st_gs_strBtnInfo[en_a_BtnId].u8_a_btnState    = BT_RELEASED;	
+		if(st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold >= st_gc_btnConfig.u8_a_debounceThreshold)
+		{
+			st_gs_strBtnInfo[en_a_BtnId].u8_a_btnState = BT_RELEASED;
+		}
+		else
+		{
+			st_gs_strBtnInfo[en_a_BtnId].u8_a_btnState    = BT_PRE_PUSH;
+		}
+		st_gs_strBtnInfo[en_a_BtnId].u8_a_debounceThreshold = ((uint8_t)0);	
 	}
 }
 static void vidReleaseState(u8_en_btnIdType en_a_BtnId)

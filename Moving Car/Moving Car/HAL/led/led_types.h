@@ -12,16 +12,10 @@
 
 #include <stdint.h>
 
-/*
-// Create LED ID ENUM
-typedef uint8_t u8_en_ledIdType;
 
-#define LED_1		((u8_en_ledIdType)0x01)
-#define LED_2		((u8_en_ledIdType)0x02)
-#define LED_3		((u8_en_ledIdType)0x03)
-#define	LED_4		((u8_en_ledIdType)0x04)
 
-*/
+
+
 
 // Create LED state ENUM
 typedef uint8_t u8_en_ledStateType;
@@ -37,8 +31,8 @@ typedef uint8_t u8_en_ledErrorType;
 
 typedef struct
 {
-	uint8_t u8_a_ledChannelID[2];
-	uint8_t u8_a_ledState;
+	uint8_t u8_a_port;
+	uint8_t u8_a_pin;
 }st_ledConfigType;
 
 

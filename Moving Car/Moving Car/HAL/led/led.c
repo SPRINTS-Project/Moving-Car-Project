@@ -22,7 +22,7 @@ const st_ledConfigType st_gc_ledConfig[LED_NUMs]={
 };
 */
 
-u8_en_ledErrorType led_Init(uint8_t u8_a_port , uint8_t u8_a_pin)
+u8_en_ledErrorType LED_init(uint8_t u8_a_port , uint8_t u8_a_pin)
 {
 	return DIO_init(u8_a_port, u8_a_pin, STD_OUTPUT);
 }

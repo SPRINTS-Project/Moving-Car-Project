@@ -44,6 +44,9 @@ typedef uint8_t u8_en_btnStateType;
 
 
 typedef struct{
+	uint8_t u8_a_port;
+	uint8_t u8_a_pin;
+	uint8_t u8_a_ID;
 	uint8_t u8_a_debounceThreshold;
 	uint8_t u8_a_holdThreshold;
 }st_btnConfigType;

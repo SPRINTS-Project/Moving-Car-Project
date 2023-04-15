@@ -2,17 +2,15 @@
  * Moving Car.c
  *
  * Created: 4/9/2023 8:13:03 PM
- * Author : engma
+ * Author : Mahmoud Sarhan
+ *	EMAIL : Eng.mahmoud.adel94@gmail.com
  */ 
 
-#include <avr/io.h>
+#include "APP/app.h"
 
 
 int main(void)
 {
-    /* Replace with your application code */
-    while (1) 
-    {
-    }
+	APP_start();
 }
 

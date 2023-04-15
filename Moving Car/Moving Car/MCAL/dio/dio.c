@@ -86,10 +86,10 @@ u8_en_dioErrors DIO_writePIN (en_dioPortsType port, en_dioPinsType pin, u8_en_di
 		{
 			if (state == STD_HIGH)
 			{
-				WR_PORT_A |= (1U << pin);
+				WR_PORT_B |= (1U << pin);
 			}
 			else{
-				WR_PORT_A &= ~(1U << pin);
+				WR_PORT_B &= ~(1U << pin);
 			}
 			return DIO_E_OK;
 		}
@@ -97,10 +97,10 @@ u8_en_dioErrors DIO_writePIN (en_dioPortsType port, en_dioPinsType pin, u8_en_di
 		{
 			if (state == STD_HIGH)
 			{
-				WR_PORT_A |= (1U << pin);
+				WR_PORT_C |= (1U << pin);
 			}
 			else{
-				WR_PORT_A &= ~(1U << pin);
+				WR_PORT_C &= ~(1U << pin);
 			}
 			return DIO_E_OK;
 		}
@@ -108,10 +108,10 @@ u8_en_dioErrors DIO_writePIN (en_dioPortsType port, en_dioPinsType pin, u8_en_di
 		{
 			if (state == STD_HIGH)
 			{
-				WR_PORT_A |= (1U << pin);
+				WR_PORT_D |= (1U << pin);
 			}
 			else{
-				WR_PORT_A &= ~(1U << pin);
+				WR_PORT_D &= ~(1U << pin);
 			}
 			return DIO_E_OK;
 		}
