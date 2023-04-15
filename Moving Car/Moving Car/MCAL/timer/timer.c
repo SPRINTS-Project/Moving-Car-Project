@@ -16,13 +16,13 @@ static Std_ReturnType TIMERx_selectClk(const TimerType_t en_a_timer_type,const T
 static Std_ReturnType TIMERx_setTimerMode(const Timer_Config_t *stPtr_a_Config);
 
 /***********************Interrupt Service Routines for Timer0 *************************/
-ISR(TIMER0_OVF_vect)
+/*ISR(TIMER0_OVF_vect)
 {
 	if(g_Timer0_callBackPtr != NULL)
 	{
-		/* The timer0 overflow  occurred (must be cleared in software) */
+		* The timer0 overflow  occurred (must be cleared in software) 
 		 CLEAR_BIT(TIFR,TOV0);
-		/* Call the Call Back function in the upper layer after the timer overflow*/
+		* Call the Call Back function in the upper layer after the timer overflow
 		(*g_Timer0_callBackPtr)();
 	}
 }
@@ -30,20 +30,20 @@ ISR(TIMER0_COMP_vect)
 {
 	if(g_Timer0_callBackPtr != NULL)
 	{
-		/* The timer0 compare match occurred (must be cleared in software) */
+		* The timer0 compare match occurred (must be cleared in software) 
 		CLEAR_BIT(TIFR,OCF0);
-		/* Call the Call Back function in the upper layer after the timer matches the compare value*/
+		* Call the Call Back function in the upper layer after the timer matches the compare value
 		(*g_Timer0_callBackPtr)();
 	}
 }
-/***********************Interrupt Service Routines for Timer1 *************************/
+***********************Interrupt Service Routines for Timer1 *************************
 ISR(TIMER1_OVF_vect)
 {
 	if(g_Timer1_callBackPtr != NULL)
 	{
-		/* The timer0 overflow  occurred (must be cleared in software) */
+		* The timer0 overflow  occurred (must be cleared in software) *
 		CLEAR_BIT(TIFR,TOV1);
-		/* Call the Call Back function in the upper layer after the timer overflow*/
+		* Call the Call Back function in the upper layer after the timer overflow*
 		(*g_Timer1_callBackPtr)();
 	}
 }
@@ -52,20 +52,20 @@ ISR(TIMER1_COMPA_vect)
 {
 	if(g_Timer1_callBackPtr != NULL)
 	{
-		/* The timer0 compare match occurred (must be cleared in software) */
+		* The timer0 compare match occurred (must be cleared in software) *
 		CLEAR_BIT(TIFR,OCF1A);
-		/* Call the Call Back function in the upper layer after the timer matches the compare value*/
+		* Call the Call Back function in the upper layer after the timer matches the compare value*
 		(*g_Timer1_callBackPtr)();
 	}
 }
-/***********************Interrupt Service Routines for Timer2 *************************/
+***********************Interrupt Service Routines for Timer2 *************************
 ISR(TIMER2_OVF_vect)
 {
 	if(g_Timer2_callBackPtr != NULL)
 	{
-		/* The timer2 overflow  occurred (must be cleared in software) */
+		* The timer2 overflow  occurred (must be cleared in software) *
 		CLEAR_BIT(TIFR,TOV2);
-		/* Call the Call Back function in the upper layer after the timer overflow*/
+		* Call the Call Back function in the upper layer after the timer overflow*
 		(*g_Timer2_callBackPtr)();
 	}
 }
@@ -74,13 +74,13 @@ ISR(TIMER2_COMP_vect)
 {
 	if(g_Timer2_callBackPtr != NULL)
 	{
-		/* The timer2 compare match occurred (must be cleared in software) */
+		* The timer2 compare match occurred (must be cleared in software) 
 		CLEAR_BIT(TIFR,OCF2);
-		/* Call the Call Back function in the upper layer after the timer matches the compare value*/
+		* Call the Call Back function in the upper layer after the timer matches the compare value*
 		(*g_Timer2_callBackPtr)();
 	}
 }
-/*****************************************************************************************/
+*****************************************************************************************/
 Std_ReturnType TIMERx_setCallBack(volatile void(*a_fptr)(void), const TimerType_t en_a_timer_type )
 {
 	Std_ReturnType l_ret = E_OK;

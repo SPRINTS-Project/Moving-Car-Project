@@ -195,7 +195,7 @@
     <Compile Include="MCAL\timer\timer.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="MCAL\timer\timer_manger.c">
+    <Compile Include="MCAL\timer\timer_private_reg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="STD_LIBRARIES\bit_math.h">

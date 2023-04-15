@@ -26,5 +26,3 @@ MCAL\ext_interrupt\ext_interrupt.c
 
 MCAL\timer\timer.c
 
-MCAL\timer\timer_manger.c
-

@@ -12,7 +12,7 @@
 #include "../../STD_LIBRARIES/STD_TYPES.h"
 #include "../../STD_LIBRARIES/bit_math.h"
 #include "../dio/dio.h"
-#include <avr/interrupt.h>
+//#include <avr/interrupt.h>
 //#include "../external_interrupt/external_interrupt.h"
 #include "timer_private_reg.h"
 
