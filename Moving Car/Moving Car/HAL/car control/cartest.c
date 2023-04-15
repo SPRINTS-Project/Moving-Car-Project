@@ -9,10 +9,10 @@
 #include <util/delay.h>
 void main(void)
 {  
- /************************************************************************/
-/*  use this method to initailize the car motors                                                                    */
-/************************************************************************/
-	/*ST_motor_t motor_1;
+ ***********************************************************************
+  use this method to initailize the car motors                         *
+ ***********************************************************************
+	ST_motor_t motor_1;
 	ST_motor_t motor_2;
 	motor_1.port=porta;
 	motor_1.pin_num1=pin0;

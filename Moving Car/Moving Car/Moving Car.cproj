@@ -135,6 +135,15 @@
     <Compile Include="HAL\button\button_types.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\car control\cartest.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\car control\car_control.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\car control\car_control.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\ext_interrupt_manager\ext_interrupt_manager.c">
       <SubType>compile</SubType>
     </Compile>
@@ -148,6 +157,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="HAL\led\led_types.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\motor\motor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\motor\motor.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
@@ -170,6 +185,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="HAL\car control\" />
     <Folder Include="HAL\ext_interrupt_manager" />
     <Folder Include="HAL\led" />
     <Folder Include="HAL\button" />

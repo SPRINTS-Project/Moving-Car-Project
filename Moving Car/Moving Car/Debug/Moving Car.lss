@@ -143,7 +143,7 @@ ISR(EXT_INT0)
   cc:	10 92 74 00 	sts	0x0074, r1	; 0x800074 <__data_end>
 	u8_gs_v_progState = BTN_STOP;
   d0:	81 e0       	ldi	r24, 0x01	; 1
-  d2:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_start>
+  d2:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 	
 }
   d6:	8f 91       	pop	r24
@@ -286,7 +286,7 @@ ISR(EXT_INT0)
  178:	11 f4       	brne	.+4      	; 0x17e <APP_start+0x9c>
 			{
 				u8_gs_v_progState = BTN_START;
- 17a:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__data_start>
+ 17a:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
 			}
 			u8_gv_delay = 0;
  17e:	10 92 74 00 	sts	0x0074, r1	; 0x800074 <__data_end>
@@ -296,7 +296,7 @@ ISR(EXT_INT0)
 	{
 		BUTTON_mainTask();
 		while (u8_gs_v_progState == BTN_STOP)
- 182:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_start>
+ 182:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
  186:	81 30       	cpi	r24, 0x01	; 1
  188:	01 f3       	breq	.-64     	; 0x14a <APP_start+0x68>
  18a:	ce c0       	rjmp	.+412    	; 0x328 <APP_start+0x246>
@@ -552,7 +552,7 @@ ISR(EXT_INT0)
 			u8_gv_delay = 0;
 		}
 		while (u8_gs_v_progState == BTN_START)
- 328:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_start>
+ 328:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
  32c:	88 23       	and	r24, r24
  32e:	09 f4       	brne	.+2      	; 0x332 <APP_start+0x250>
  330:	2d cf       	rjmp	.-422    	; 0x18c <APP_start+0xaa>
