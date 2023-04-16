@@ -45,7 +45,7 @@ u8_en_interruptErrorType ext_init(ext_interrupt_config_t *ext_interrupt_config, 
 *-1- (E_NOK) if there is something wrong
 *-0- (E_OK) otherwise
 */
-u8_en_interruptErrorType ext_enable(ext_interrupt_config_t *ext_interrupt_config);
+u8_en_interruptErrorType ext_enable(uint8_t u8_intNum);
 
 /*
 *   -Description-
@@ -62,5 +62,5 @@ u8_en_interruptErrorType ext_enable(ext_interrupt_config_t *ext_interrupt_config
 *-1- (E_NOK) if there is something wrong
 *-0- (E_OK) otherwise
 */
-u8_en_interruptErrorType ext_disable(ext_interrupt_config_t *ext_interrupt_config);
+u8_en_interruptErrorType ext_disable(uint8_t u8_intNum);
 #endif

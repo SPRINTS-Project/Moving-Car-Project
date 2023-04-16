@@ -7,26 +7,37 @@
 #include "timer.h"
 
 /* Global pointers to function to hold the address of the call back function in the upper layers */
-static volatile void (*g_Timer0_callBackPtr)(void) = NULL;
-static volatile void (*g_Timer1_callBackPtr)(void) = NULL;
-static volatile void (*g_Timer2_callBackPtr)(void) = NULL;
+static void (*g_Timer0_callBackPtr)(void) = NULL;
+static void (*g_Timer1_callBackPtr)(void) = NULL;
+static void (*g_Timer2_callBackPtr)(void) = NULL;
 
 /*helper static functions prototypes*/
 static Std_ReturnType TIMERx_selectClk(const TimerType_t en_a_timer_type,const TimerClock_t en_a_timer_clk);
 static Std_ReturnType TIMERx_setTimerMode(const Timer_Config_t *stPtr_a_Config);
 
 /***********************Interrupt Service Routines for Timer0 *************************/
-/*ISR(TIMER0_OVF_vect)
+
+ISR(TIMER1_OVF)
+{
+	if(g_Timer1_callBackPtr != NULL)
+	{
+		// The timer0 overflow  occurred (must be cleared in software) 
+		CLEAR_BIT(TIFR,TOV1);
+		// Call the Call Back function in the upper layer after the timer overflow
+		(*g_Timer1_callBackPtr)();
+	}
+}
+ISR(TIMER0_OVF)
 {
 	if(g_Timer0_callBackPtr != NULL)
 	{
-		* The timer0 overflow  occurred (must be cleared in software) 
+		// The timer0 overflow  occurred (must be cleared in software) 
 		 CLEAR_BIT(TIFR,TOV0);
-		* Call the Call Back function in the upper layer after the timer overflow
+		//Call the Call Back function in the upper layer after the timer overflow
 		(*g_Timer0_callBackPtr)();
 	}
 }
-ISR(TIMER0_COMP_vect)
+/*ISR(TIMER0_COMP)
 {
 	if(g_Timer0_callBackPtr != NULL)
 	{
@@ -37,7 +48,7 @@ ISR(TIMER0_COMP_vect)
 	}
 }
 ***********************Interrupt Service Routines for Timer1 *************************
-ISR(TIMER1_OVF_vect)
+ISR(TIMER1_OVF)
 {
 	if(g_Timer1_callBackPtr != NULL)
 	{
@@ -48,7 +59,7 @@ ISR(TIMER1_OVF_vect)
 	}
 }
 
-ISR(TIMER1_COMPA_vect)
+ISR(TIMER1_COMPA)
 {
 	if(g_Timer1_callBackPtr != NULL)
 	{
@@ -59,7 +70,7 @@ ISR(TIMER1_COMPA_vect)
 	}
 }
 ***********************Interrupt Service Routines for Timer2 *************************
-ISR(TIMER2_OVF_vect)
+ISR(TIMER2_OVF)
 {
 	if(g_Timer2_callBackPtr != NULL)
 	{
@@ -70,7 +81,7 @@ ISR(TIMER2_OVF_vect)
 	}
 }
 
-ISR(TIMER2_COMP_vect)
+ISR(TIMER2_COMP)
 {
 	if(g_Timer2_callBackPtr != NULL)
 	{
@@ -81,7 +92,7 @@ ISR(TIMER2_COMP_vect)
 	}
 }
 *****************************************************************************************/
-Std_ReturnType TIMERx_setCallBack(volatile void(*a_fptr)(void), const TimerType_t en_a_timer_type )
+Std_ReturnType TIMERx_setCallBack( void(*a_fptr)(void), const TimerType_t en_a_timer_type )
 {
 	Std_ReturnType l_ret = E_OK;
 	if( (en_a_timer_type >= INVALID_TIMER_TYPE) || (NULL==a_fptr) )
@@ -130,8 +141,6 @@ Std_ReturnType TIMERx_init(const Timer_Config_t *stPtr_a_Config)
 				CLEAR_REG(TCNT0);
 				CLEAR_REG(TCCR0);
 				CLEAR_REG(OCR0);
-				CLEAR_REG(TIMSK);
-				CLEAR_REG(TIFR);
 				/*Configure initial value in TCNT0 for Timer0 to start count from it*/
 				TCNT0 = stPtr_a_Config->timer_InitialValue & U8_BIT_REG_MASK;
 				/*Configure the TIMER mode value and enable the interrupt for this mode*/
@@ -146,12 +155,16 @@ Std_ReturnType TIMERx_init(const Timer_Config_t *stPtr_a_Config)
 				CLEAR_REG(TCCR1B);
 				CLEAR_REG(OCR1AH);
 				CLEAR_REG(OCR1AL);
-				CLEAR_REG(TIMSK);
-				CLEAR_REG(TIFR);
 				/*Configure initial value in TCNT1(high&low) for Timer0 to start count from it*/
+<<<<<<< HEAD
 				TCNT1L =(uint8_t)(stPtr_a_Config->timer_InitialValue) & U8_BIT_REG_MASK;
 
 				TCNT1H = (stPtr_a_Config->timer_InitialValue >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;
+=======
+				TCNT1 = stPtr_a_Config->timer_InitialValue;
+				/*TCNT1L =(stPtr_a_Config->timer_InitialValue) & U8_BIT_REG_MASK;
+				TCNT1H = (stPtr_a_Config->timer_InitialValue >> 8) & U8_BIT_REG_MASK;*/
+>>>>>>> f1efeda0207d3adc9f319528a6a71811ce505cb0
 				/*Configure the TIMER mode value and enable the interrupt for this mode*/
 				l_ret |= TIMERx_setTimerMode(stPtr_a_Config);
 				break;
@@ -161,8 +174,6 @@ Std_ReturnType TIMERx_init(const Timer_Config_t *stPtr_a_Config)
 				CLEAR_REG(TCNT2);
 				CLEAR_REG(TCCR2);
 				CLEAR_REG(OCR2);
-				CLEAR_REG(TIMSK);
-				CLEAR_REG(TIFR);
 				/*Configure initial value in TCNT for Timer2 to start count from it*/
 				TCNT2 = stPtr_a_Config->timer_InitialValue & U8_BIT_REG_MASK;
 				/*Configure the TIMER mode value and enable the interrupt for this mode*/
@@ -206,8 +217,14 @@ Std_ReturnType TIMERx_setValue(const TimerType_t en_a_timer_type ,const uint16_t
 				break;
 				
 			case Timer1:
+<<<<<<< HEAD
 				TCNT1L = (uint8_t)(u16_a_timer_value) & U8_BIT_REG_MASK;
 				TCNT1H = (uint8_t)(u16_a_timer_value >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;		
+=======
+				TCNT1 = u16_a_timer_value;
+				/*TCNT1L = (uint8_t)(u16_a_timer_value) & U8_BIT_REG_MASK;
+				TCNT1H = (uint8_t)(u16_a_timer_value >> U8_BIT_REG_MASK) & U8_BIT_REG_MASK;	*/	
+>>>>>>> f1efeda0207d3adc9f319528a6a71811ce505cb0
 				break;
 				
 			case Timer2:
@@ -238,8 +255,13 @@ Std_ReturnType TIMERx_CTC_SetCompare(const TimerType_t en_a_timer_type ,const ui
 				break;
 				
 			case Timer1:
+<<<<<<< HEAD
 				OCR1AL = (uint8_t)u16_a_compareValue & U8_BIT_REG_MASK;
 				OCR1AH = (u16_a_compareValue >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;
+=======
+				OCR1AL = (uint8_t)u16_a_compareValue ;
+				OCR1AH = (uint8_t)(u16_a_compareValue >> 8);
+>>>>>>> f1efeda0207d3adc9f319528a6a71811ce505cb0
 				break;
 				
 			case Timer2:
@@ -536,6 +558,7 @@ static Std_ReturnType TIMERx_setTimerMode(const Timer_Config_t *stPtr_a_Config)
 						CLEAR_BIT(TCCR0,COM00);
 						CLEAR_BIT(TCCR0,COM01);
 						/* Enable Timer0 overflow interrupt*/
+						//TIMSK |= 1<< TOIE0;
 						SET_BIT(TIMSK,TOIE0);
 						break;
 					case TIMER_PHASE_CORRECT_PWM_MODE:
@@ -660,6 +683,7 @@ static Std_ReturnType TIMERx_setTimerMode(const Timer_Config_t *stPtr_a_Config)
 						CLEAR_BIT(TCCR1A,COM1B0);
 						CLEAR_BIT(TCCR1A,COM1B1);
 						/* Enable Timer0 overflow interrupt*/
+						//TIMSK |= 1<<  TOIE1;
 						SET_BIT(TIMSK,TOIE1);
 						break;
 					case TIMER_PHASE_CORRECT_PWM_MODE:
@@ -710,8 +734,13 @@ static Std_ReturnType TIMERx_setTimerMode(const Timer_Config_t *stPtr_a_Config)
 								break;
 						}
 						/*The Output Compare Register contains an 16-bit value that is continuously compared with the  counter value (TCNT1) */
+<<<<<<< HEAD
 						OCR1AL = (uint8_t)stPtr_a_Config->timer_compare_MatchValue & U8_BIT_REG_MASK;
 						OCR1AH = (stPtr_a_Config->timer_compare_MatchValue >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;
+=======
+						OCR1AL = (uint8_t)stPtr_a_Config->timer_compare_MatchValue ;
+						OCR1AH = (uint8_t)(stPtr_a_Config->timer_compare_MatchValue >> 8);
+>>>>>>> f1efeda0207d3adc9f319528a6a71811ce505cb0
 						break;
 						
 					case TIMER_FAST_PWM_MODE:
@@ -758,8 +787,13 @@ static Std_ReturnType TIMERx_setTimerMode(const Timer_Config_t *stPtr_a_Config)
 								break;
 						}
 						/*The Output Compare Register contains an 16-bit value that is continuously compared with the  counter value (TCNT1) */
+<<<<<<< HEAD
 						OCR1AL = (uint8_t)stPtr_a_Config->timer_compare_MatchValue & U8_BIT_REG_MASK;
 						OCR1AH = (stPtr_a_Config->timer_compare_MatchValue >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;
+=======
+						OCR1AL = (uint8_t)stPtr_a_Config->timer_compare_MatchValue ;
+						OCR1AH = (uint8_t)(stPtr_a_Config->timer_compare_MatchValue >> 8);
+>>>>>>> f1efeda0207d3adc9f319528a6a71811ce505cb0
 						break;
 						
 					case TIMER_CTC_MODE:
@@ -807,8 +841,13 @@ static Std_ReturnType TIMERx_setTimerMode(const Timer_Config_t *stPtr_a_Config)
 								break;
 						}
 					    /*The Output Compare Register contains an 16-bit value that is continuously compared with the  counter value (TCNT1) */
+<<<<<<< HEAD
 						OCR1AL = stPtr_a_Config->timer_compare_MatchValue & U8_BIT_REG_MASK;
 						OCR1AH = (stPtr_a_Config->timer_compare_MatchValue >> u8_BIT_REG_shift) & U8_BIT_REG_MASK;	
+=======
+						OCR1AL = stPtr_a_Config->timer_compare_MatchValue ;
+						OCR1AH = (stPtr_a_Config->timer_compare_MatchValue >> 8) ;	
+>>>>>>> f1efeda0207d3adc9f319528a6a71811ce505cb0
 						/* Enable Timer1 CTC-A mode interrupt*/
 						SET_BIT(TIMSK,OCIE1A);
 						break;

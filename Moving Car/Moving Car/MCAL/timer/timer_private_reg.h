@@ -16,6 +16,7 @@
 #ifndef TCNT0
 #define TCNT0   (*(volatile uint8_t*)0x52)
 #endif
+
 #ifndef TCCR0
 /*Timer/Counter Control Register*/
 #define TCCR0   (*(volatile uint8_t*)0x53)
@@ -97,6 +98,10 @@
 /*TCCR1B – Timer/Counter1 Control Register B*/
 #ifndef TCCR1B
 #define TCCR1B   (*(volatile uint8_t*)0x4E)
+#endif
+
+#ifndef TCNT1
+#define TCNT1   (*(volatile uint16_t*)0x4C)
 #endif
 /*TCNT1H  Timer/Counter1 – Counter Register High Byte*/
 #ifndef TCNT1H

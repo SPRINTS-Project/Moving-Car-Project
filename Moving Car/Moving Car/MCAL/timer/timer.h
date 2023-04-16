@@ -12,6 +12,7 @@
 #include "../../STD_LIBRARIES/STD_TYPES.h"
 #include "../../STD_LIBRARIES/bit_math.h"
 #include "../dio/dio.h"
+#include "../EXT_Interrupt/interrupt.h"
 //#include <avr/interrupt.h>
 //#include "../external_interrupt/external_interrupt.h"
 #include "timer_private_reg.h"
@@ -116,7 +117,7 @@ Std_ReturnType TIMERx_start(const TimerClock_t en_a_timer_clk,const TimerType_t 
 * E_OK :the function done successfully
 * E_NOT_OK :the function has issues performing the function
 */
-Std_ReturnType TIMERx_setCallBack(volatile void(*a_fptr)(void), const TimerType_t en_a_timer_type );
+Std_ReturnType TIMERx_setCallBack( void(*a_fptr)(void), const TimerType_t en_a_timer_type );
 
 /*
 * Description :set a certain value on the timer counting register 

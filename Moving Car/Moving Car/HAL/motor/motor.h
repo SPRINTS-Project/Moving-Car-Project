@@ -34,7 +34,7 @@ typedef enum EN_motor_error_t
 * input       : pointer to structure which have port and two pin number
 * return      :MOTOR_OK or MOTR_NOK                                                                     
 ************************************************************************/
-EN_motor_error_t MOTOR_INIT(ST_motor_t* motor);
+EN_motor_error_t MOTOR_INIT(const ST_motor_t* motor);
 
 
 /************************************************************************
@@ -42,7 +42,7 @@ EN_motor_error_t MOTOR_INIT(ST_motor_t* motor);
 * input       : pointer to structure which have port and two pin number and speed of motor
 * return      :MOTOR_OK or MOTR_NOK
 ************************************************************************/
-EN_motor_error_t MOTOR_FORWARD(ST_motor_t* motor);
+EN_motor_error_t MOTOR_FORWARD(const ST_motor_t* motor);
 
 
 /************************************************************************
@@ -50,7 +50,7 @@ EN_motor_error_t MOTOR_FORWARD(ST_motor_t* motor);
 * input       : pointer to structure which have port and two pin number and speed of motor
 * return      :MOTOR_OK or MOTR_NOK
 ************************************************************************/
-EN_motor_error_t MOTOR_BACKWARD(ST_motor_t* motor);
+EN_motor_error_t MOTOR_BACKWARD(const ST_motor_t* motor);
 
 
 /************************************************************************
@@ -58,7 +58,7 @@ EN_motor_error_t MOTOR_BACKWARD(ST_motor_t* motor);
 * input       : pointer to structure which have port and two pin number 
 * return      :MOTOR_OK or MOTR_NOK
 ************************************************************************/
-EN_motor_error_t MOTOR_STOP(ST_motor_t* motor);
+EN_motor_error_t MOTOR_STOP(const ST_motor_t* motor);
 
 
 
