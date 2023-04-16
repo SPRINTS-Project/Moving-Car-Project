@@ -18,9 +18,9 @@
 //#include "../MCAL/EXT_Interrupt/interrupt.h"
 //#include <avr/interrupt.h>
 
-
-#define BTN_START		0x00
-#define BTN_STOP		0x01
+typedef uint8_t u8_en_PROGRAM_STATE;
+#define BTN_START		((u8_en_PROGRAM_STATE)0x00)
+#define BTN_STOP		((u8_en_PROGRAM_STATE)0x01)
 
 
 #define APP_TIMER_1_INIT_VALUE		61628

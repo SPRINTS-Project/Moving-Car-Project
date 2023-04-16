@@ -27,7 +27,8 @@ typedef uint8_t u8_en_ledStateType;
 // Create LED ERROR ENUM
 typedef uint8_t u8_en_ledErrorType;
 #define LED_OK			((u8_en_ledErrorType)0x00)
-#define LED_UNDEFINED	((u8_en_ledErrorType)0x01)
+#define LED_InvalidPin	((u8_en_ledErrorType)0x01)
+#define LED_InvalidPort	((u8_en_ledErrorType)0x02)
 
 typedef struct
 {
