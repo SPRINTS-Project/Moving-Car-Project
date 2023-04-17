@@ -4,11 +4,12 @@
 #include "../ext_interrupt/interrupt.h"
 //#include "../../utilities/STD_TYPES.h"
 #include <stdint.h>
-
+/**datatype to hold the state of function and it has two options  INT_E_OK || INT_E_NOK**/
 typedef uint8_t u8_en_interruptErrorType;
 
-#define INT_E_OK			((u8_en_interruptErrorType)0x00)
-#define INT_E_NOK			((u8_en_interruptErrorType)0x01)
+#define INT_E_OK			((u8_en_interruptErrorType)0x00)// function done 
+#define INT_E_NOK			((u8_en_interruptErrorType)0x01)// function didn't do its behavior correctly  
+
 
 #define GICR_ADD			 (*((volatile uint8_t *) 0x5B)) 
 #define INT0_Globle		6
@@ -21,13 +22,19 @@ typedef uint8_t u8_en_interruptErrorType;
 
 
 
-
+/* datatype  of enum has three choices of interrupts 
+	external interrupt 0, external interrupt 1, external interrupt 2
+*/
 typedef enum{
     EXT_0=0,
     EXT_1,
     EXT_2
 }ext_interrupt_no_t;
 
+
+/* datatype  of enum has four options of interrupt detection  
+	low level, locical change, falling edge, rising edge
+*/
 typedef enum{
     LOW_LEVEL,
 	LOGICAL_CHANGE,

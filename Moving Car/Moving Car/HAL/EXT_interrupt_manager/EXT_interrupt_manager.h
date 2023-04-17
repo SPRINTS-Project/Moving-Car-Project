@@ -2,7 +2,15 @@
 #define EXT_INTERRUPT_MANAGER_H
 #include "../../MCAL/ext_interrupt/ext_interrupt.h"
 
-
+/*
+*
+*
+* -ext_interrupt_config_t datatype hold the external interrupt config
+*   -Members-
+* -1-  (ext_interrupt_no_t ext_interrupt_no) number of external interrupt
+* -2-  (EDGE_detection_t edge_select) the state of line will fire the interrupt
+*
+*/
 typedef struct 
 {
 ext_interrupt_no_t ext_interrupt_no;
