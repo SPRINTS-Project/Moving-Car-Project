@@ -69,4 +69,8 @@ Std_ReturnType TIMER_MANGER_start(const TimerClock_t en_a_timer_clock,const Time
 */
 Std_ReturnType TIMER_MANGER_stop(const TimerType_t en_a_timer_num);
 
+
+
+Std_ReturnType TIMER_MANGER_setValue(const TimerType_t en_a_timer_num , uint16_t u16_a_InitialValue);
+
 #endif /* TIMER_MANGER_H_ */

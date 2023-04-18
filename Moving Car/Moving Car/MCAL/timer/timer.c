@@ -207,7 +207,7 @@ Std_ReturnType TIMERx_setValue(const TimerType_t en_a_timer_type ,const uint16_t
 		switch(en_a_timer_type)
 		{
 			case Timer0:
-				TCNT0 = u16_a_timer_value & U8_BIT_REG_MASK;
+				TCNT0 = (uint8_t) u16_a_timer_value;
 				break;
 				
 			case Timer1:

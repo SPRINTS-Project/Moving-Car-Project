@@ -60,3 +60,19 @@ Std_ReturnType TIMER_MANGER_stop(const TimerType_t en_a_timer_num)
 	}
 	return l_ret;
 }
+
+
+Std_ReturnType TIMER_MANGER_setValue(const TimerType_t en_a_timer_num , uint16_t u16_a_InitialValue)
+{
+	Std_ReturnType l_ret = E_OK;
+	if(en_a_timer_num >= INVALID_TIMER_TYPE)
+	{
+		l_ret = E_NOT_OK;
+	}
+	else
+	{
+		/*stop the clock for the specific timer*/
+		l_ret =  TIMERx_setValue(en_a_timer_num , u16_a_InitialValue);
+	}
+	return l_ret;
+}
